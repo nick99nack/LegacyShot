@@ -1,0 +1,136 @@
+// LegacyShot.rc - resources for LegacyShot (VC++ 6.0)
+#include <windows.h>
+#include <commctrl.h>
+#include "resource.h"
+
+#ifndef IDC_STATIC
+#define IDC_STATIC (-1)
+#endif
+
+IDI_APP ICON "LegacyShot.ico"
+
+IDR_TRAYMENU MENU
+BEGIN
+    POPUP "Tray"
+    BEGIN
+        MENUITEM "Capture &Area\tPrint Screen", ID_CAPTURE_REGION
+        MENUITEM "Capture &Whole Screen",        ID_CAPTURE_FULL
+        MENUITEM SEPARATOR
+        MENUITEM "&Upload Image File...",        ID_UPLOAD_FILE
+        MENUITEM "&Settings...",                 ID_SETTINGS
+        MENUITEM "A&bout LegacyShot",            ID_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                        ID_EXIT
+    END
+END
+
+IDD_SHOT DIALOGEX 0, 0, 340, 212
+STYLE DS_MODALFRAME | DS_CENTER | DS_SETFOREGROUND | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "LegacyShot"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "", IDC_PREVIEW, "Static", SS_OWNERDRAW, 7, 7, 200, 150
+    LTEXT           "", IDC_INFO, 7, 161, 200, 9
+    GROUPBOX        "Format", IDC_STATIC, 215, 4, 118, 54
+    CONTROL         "&PNG", IDC_FMT_PNG, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 222, 16, 104, 10
+    CONTROL         "CompuServe &GIF", IDC_FMT_GIF, "Button",
+                    BS_AUTORADIOBUTTON, 222, 29, 104, 10
+    CONTROL         "&BMP", IDC_FMT_BMP, "Button",
+                    BS_AUTORADIOBUTTON, 222, 42, 104, 10
+    LTEXT           "", IDC_FMT_HINT, 215, 62, 118, 36
+    LTEXT           "File &name:", IDC_STATIC, 215, 102, 118, 9
+    EDITTEXT        IDC_NAME, 215, 112, 118, 12, ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "&Description (optional):", IDC_STATIC, 215, 129, 118, 9
+    EDITTEXT        IDC_DESC, 215, 139, 118, 40, ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
+    DEFPUSHBUTTON   "&Upload", IDC_UPLOAD, 7, 191, 58, 14, WS_GROUP
+    PUSHBUTTON      "&Save As...", IDC_SAVE, 70, 191, 58, 14
+    PUSHBUTTON      "&Copy", IDC_COPY, 133, 191, 58, 14
+    PUSHBUTTON      "&Reselect", IDC_RESELECT, 196, 191, 58, 14
+    PUSHBUTTON      "Close", IDCANCEL, 275, 191, 58, 14
+END
+
+IDD_UPLOAD DIALOGEX 0, 0, 260, 150
+STYLE DS_MODALFRAME | DS_CENTER | DS_SETFOREGROUND | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Uploading - LegacyShot"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "", IDC_FILEINFO, 7, 7, 246, 9
+    LTEXT           "Starting...", IDC_STATUS, 7, 20, 246, 18
+    CONTROL         "", IDC_PROGRESS, "msctls_progress32", WS_BORDER, 7, 42, 246, 12
+    LTEXT           "Sent:", IDC_STATIC, 7, 60, 32, 9
+    LTEXT           "-", IDC_BYTES, 40, 60, 92, 9
+    LTEXT           "Rate:", IDC_STATIC, 136, 60, 24, 9
+    LTEXT           "-", IDC_RATE, 162, 60, 91, 9
+    LTEXT           "Time left:", IDC_STATIC, 7, 72, 32, 9
+    LTEXT           "-", IDC_ETA, 40, 72, 92, 9
+    LTEXT           "&Link:", IDC_STATIC, 7, 90, 246, 9
+    EDITTEXT        IDC_LINK, 7, 100, 246, 12, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "&Copy Link", IDC_COPYLINK, 7, 129, 60, 14, WS_DISABLED
+    PUSHBUTTON      "&Open", IDC_OPENLINK, 72, 129, 50, 14, WS_DISABLED
+    PUSHBUTTON      "Cancel", IDCANCEL, 193, 129, 60, 14
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 260, 232
+STYLE DS_MODALFRAME | DS_CENTER | DS_SETFOREGROUND | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "LegacyShot Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Server", IDC_STATIC, 7, 4, 246, 90
+    LTEXT           "&Host:", IDC_STATIC, 14, 18, 44, 9
+    EDITTEXT        IDC_HOST, 60, 16, 120, 12, ES_AUTOHSCROLL
+    LTEXT           "&Port:", IDC_STATIC, 186, 18, 20, 9
+    EDITTEXT        IDC_PORT, 208, 16, 38, 12, ES_NUMBER
+    LTEXT           "&User name:", IDC_STATIC, 14, 34, 44, 9
+    EDITTEXT        IDC_USER, 60, 32, 186, 12, ES_AUTOHSCROLL
+    LTEXT           "API &key:", IDC_STATIC, 14, 50, 44, 9
+    EDITTEXT        IDC_KEY, 60, 48, 186, 12, ES_AUTOHSCROLL | ES_PASSWORD
+    PUSHBUTTON      "&Test Login", IDC_TESTLOGIN, 14, 76, 50, 14
+    LTEXT           "", IDC_TESTRESULT, 70, 78, 178, 10
+    GROUPBOX        "Uploading", IDC_STATIC, 7, 98, 246, 72
+    LTEXT           "&Connection:", IDC_STATIC, 14, 112, 54, 9
+    COMBOBOX        IDC_LINKPROFILE, 70, 110, 176, 60, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Default &format:", IDC_STATIC, 14, 128, 54, 9
+    COMBOBOX        IDC_DEFFORMAT, 70, 126, 176, 60, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Copy the &link to the clipboard after uploading",
+                    IDC_COPYLINKAUTO, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 14, 143, 232, 10
+    CONTROL         "&Open the link in a web browser after uploading",
+                    IDC_OPENLINKAUTO, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 14, 155, 232, 10
+    GROUPBOX        "Hotkeys", IDC_STATIC, 7, 174, 246, 32
+    CONTROL         "Print &Screen captures an area", IDC_USEPRTSC, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 14, 187, 118, 10
+    LTEXT           "Also:", IDC_STATIC, 136, 188, 20, 9
+    CONTROL         "", IDC_HOTKEY, "msctls_hotkey32", WS_BORDER | WS_TABSTOP, 160, 186, 86, 12
+    DEFPUSHBUTTON   "OK", IDOK, 147, 212, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 203, 212, 50, 14
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS VOS__WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "FileDescription", "LegacyShot screenshot uploader\0"
+            VALUE "FileVersion", "1.0\0"
+            VALUE "InternalName", "LegacyShot\0"
+            VALUE "OriginalFilename", "LegacyShot.exe\0"
+            VALUE "ProductName", "LegacyShot\0"
+            VALUE "ProductVersion", "1.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END

@@ -1,0 +1,31 @@
+# Visual C++ 6.0 Project & Workspace files
+*.opt
+*.plg
+*.ncb
+*.aps
+*.clw
+*.positions
+*.bak
+*~
+
+# Build Results & Outputs
+Debug/
+Release/
+*.obj
+*.pch
+*.pdb
+*.idb
+*.ilk
+*.exe
+*.dll
+*.lib
+*.exp
+*.bsc
+*.sbr
+
+# User-specific & OS files
+*.suo
+*.user
+Thumbs.db
+Desktop.ini
+.DS_Store
